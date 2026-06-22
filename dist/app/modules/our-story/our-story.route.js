@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.OurStoryRoutes = void 0;
+const express_1 = require("express");
+const validateRequest_1 = require("../../middlewares/validateRequest");
+const multer_config_1 = require("../../config/multer.config");
+const our_story_validation_1 = require("./our-story.validation");
+const our_story_controller_1 = require("./our-story.controller");
+const router = (0, express_1.Router)();
+router.post("/", multer_config_1.multerUpload.single("file"), (0, validateRequest_1.validateRequest)(our_story_validation_1.OurStoryValidation.createOurStorySchema), our_story_controller_1.OurStoryController.createOurStory);
+router.get("/", our_story_controller_1.OurStoryController.getAllOurStory);
+router.get("/:id", our_story_controller_1.OurStoryController.getOurStoryById);
+router.patch("/:id", multer_config_1.multerUpload.single("file"), (0, validateRequest_1.validateRequest)(our_story_validation_1.OurStoryValidation.updateOurStorySchema), our_story_controller_1.OurStoryController.updateOurStory);
+router.delete("/:id", our_story_controller_1.OurStoryController.deleteOurStory);
+exports.OurStoryRoutes = router;

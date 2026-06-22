@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Leave a Review</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f7f7f7;
+        color: #333;
+      }
+      .container {
+        max-width: 500px;
+        margin: 40px auto;
+        background: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+      .btn {
+        display: inline-block;
+        padding: 12px 24px;
+        background: #a9f877;
+        color: #000 !important;
+        text-decoration: none;
+        border-radius: 4px;
+        margin-top: 20px;
+        font-weight: bold;
+      }
+      .footer {
+        margin-top: 30px;
+        font-size: 12px;
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>How was your class? ⭐</h2>
+      <p>Hello <strong><%= studentName %></strong>,</p>
+      <p>
+        Your class with <strong><%= teacherName %></strong> on
+        <strong><%= date %></strong> at <strong><%= startTime %></strong> has
+        been completed.
+      </p>
+      <p>
+        We'd love to hear your feedback! Please take a moment to leave a review.
+      </p>
+      <a class="btn" href="<%= reviewLink %>">Leave a Review</a>
+      <div class="footer">&copy; Lenguable. All rights reserved.</div>
+    </div>
+  </body>
+</html>

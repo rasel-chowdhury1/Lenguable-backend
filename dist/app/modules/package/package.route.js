@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PackageRoutes = void 0;
+const express_1 = require("express");
+const package_controller_1 = require("./package.controller");
+const validateRequest_1 = require("../../middlewares/validateRequest");
+const package_validation_1 = require("./package.validation");
+const checkAuth_1 = require("../../middlewares/checkAuth");
+const user_interface_1 = require("../user/user.interface");
+const router = (0, express_1.Router)();
+router.post("/", (0, checkAuth_1.checkAuth)(user_interface_1.Role.ADMIN), (0, validateRequest_1.validateRequest)(package_validation_1.CreatePackageZodSchema), package_controller_1.PackageController.createPackage);
+router.get("/", package_controller_1.PackageController.getAllPackages);
+router.get("/:id", package_controller_1.PackageController.getSinglePackage);
+router.patch("/:id", (0, checkAuth_1.checkAuth)(user_interface_1.Role.ADMIN), (0, validateRequest_1.validateRequest)(package_validation_1.UpdatePackageZodSchema), package_controller_1.PackageController.updatePackage);
+router.delete("/:id", (0, checkAuth_1.checkAuth)(user_interface_1.Role.ADMIN), package_controller_1.PackageController.deletePackage);
+exports.PackageRoutes = router;

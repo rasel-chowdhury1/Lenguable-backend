@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FAQRoutes = void 0;
+const express_1 = require("express");
+const faq_controller_1 = require("./faq.controller");
+const validateRequest_1 = require("../../middlewares/validateRequest");
+const faq_validation_1 = require("./faq.validation");
+const router = (0, express_1.Router)();
+router.post("/", (0, validateRequest_1.validateRequest)(faq_validation_1.FAQValidation.createFAQSchema), faq_controller_1.FAQController.createFAQ);
+router.get("/", faq_controller_1.FAQController.getAllFAQ);
+router.get("/:id", faq_controller_1.FAQController.getFAQById);
+router.patch("/:id", (0, validateRequest_1.validateRequest)(faq_validation_1.FAQValidation.updateFAQSchema), faq_controller_1.FAQController.updateFAQ);
+router.delete("/:id", faq_controller_1.FAQController.deleteFAQ);
+exports.FAQRoutes = router;
