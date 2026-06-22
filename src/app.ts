@@ -31,16 +31,18 @@ app.use(cookieParser());
 app.use(express.json());
 app.set("trust proxy", 1);
 app.use(express.urlencoded({ extended: true }));
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:3001",
+  "https://lenguable.com",
+  "https://www.lenguable.com",
+  "https://admin.lenguable.com",
+  "https://tcp6n2f2-3000.inc1.devtunnels.ms",
+];
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "http://localhost:3001",
-      "https://lenguable.com",
-      "https://www.lenguable.com",
-      "https://admin.lenguable.com",
-      "https://tcp6n2f2-3000.inc1.devtunnels.ms"
-    ],
+    origin: process.env.NODE_ENV === "production" ? allowedOrigins : true,
     credentials: true,
   }),
 );
