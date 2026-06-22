@@ -60,7 +60,7 @@ const markPaymentCompleted = async (
 
 // Get all payments (admin)
 const getAllPayments = async () => {
-  const payments = await PaymentModel.find()
+  const payments = await PaymentModel.find({status: {$ne: "pending"}})
     .populate("studentId", "name email")
     .populate("packageId", "name price credits")
     .sort({ createdAt: -1 });
