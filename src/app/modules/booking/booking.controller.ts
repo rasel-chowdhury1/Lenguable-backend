@@ -112,6 +112,18 @@ const getAllBookings = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const deleteBooking = catchAsync(async (req: Request, res: Response) => {
+  const { bookingId } = req.params;
+  const result = await BookingService.deleteBooking(bookingId);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Booking deleted successfully",
+    data: result,
+  });
+});
+
 export const BookingController = {
   createBooking,
   getMyBookings,
@@ -120,4 +132,5 @@ export const BookingController = {
   markStudentJoined,
   joinViaLink,
   getAllBookings,
+  deleteBooking,
 };

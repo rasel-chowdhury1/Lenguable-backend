@@ -35,4 +35,10 @@ router.patch(
   BookingController.markStudentJoined,
 );
 
+router.delete(
+  "/:bookingId",
+  checkAuth(Role.ADMIN),
+  BookingController.deleteBooking,
+);
+
 export const BookingRoutes = router;

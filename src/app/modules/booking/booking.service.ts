@@ -589,6 +589,33 @@ const getAllBookings = async () => {
     .sort({ createdAt: -1 });
   return bookings;
 };
+
+const deleteBooking = async (bookingId: string) => {
+  const booking = await BookingModel.findById(bookingId);
+  if (!booking) {
+    throw new AppError(httpStatus.NOT_FOUND, "Booking not found");
+  }
+
+  // Free up the availability slot
+  await AvailabilityModel.updateOne(
+    {
+      teacherId: booking.teacherId,
+      "slots.startTime": new Date(booking.startTime),
+    },
+    { $set: { "slots.$.isBooked": false } },
+  );
+
+  // Remove the Google Calendar event if present
+  if (booking.calendarEventId) {
+    deleteGoogleCalendarEvent(booking.teacherId.toString(), booking.calendarEventId)
+      .catch((err) => console.error("Failed to delete calendar event on booking delete:", err));
+  }
+
+  await BookingModel.findByIdAndDelete(bookingId);
+
+  return { deleted: true };
+};
+
 export const BookingService = {
   createBooking,
   getMyBookings,
@@ -597,4 +624,5 @@ export const BookingService = {
   markStudentJoined,
   joinViaLink,
   getAllBookings,
+  deleteBooking,
 };
