@@ -602,7 +602,15 @@ const assignTeacher = async (bookingId: string, teacherId: string) => {
   }
 
   booking.teacherId = new mongoose.Types.ObjectId(teacherId) as any;
-  await booking.save();
+
+  try {
+    await booking.save();
+  } catch (error) {
+    console.log("error=>>> ", error)
+  }
+  
+
+
 
   return booking;
 };
