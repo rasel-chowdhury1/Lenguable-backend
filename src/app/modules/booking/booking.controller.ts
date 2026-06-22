@@ -101,13 +101,36 @@ const joinViaLink = catchAsync(async (req: Request, res: Response) => {
   res.redirect(meetLink);
 });
 
-const getAllBookings = catchAsync(async (req: Request, res: Response) => {
+const getAllBookings = catchAsync(async (_req: Request, res: Response) => {
   const result = await BookingService.getAllBookings();
 
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
     message: "All bookings retrieved successfully",
+    data: result,
+  });
+});
+
+const assignTeacher = catchAsync(async (req: Request, res: Response) => {
+  const { bookingId } = req.params;
+  const { teacherId } = req.body;
+
+  if (!teacherId) {
+    return sendResponse(res, {
+      success: false,
+      statusCode: httpStatus.BAD_REQUEST,
+      message: "teacherId is required",
+      data: null,
+    });
+  }
+
+  const result = await BookingService.assignTeacher(bookingId, teacherId);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Teacher assigned to booking successfully",
     data: result,
   });
 });
@@ -132,5 +155,6 @@ export const BookingController = {
   markStudentJoined,
   joinViaLink,
   getAllBookings,
+  assignTeacher,
   deleteBooking,
 };

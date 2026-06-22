@@ -590,6 +590,23 @@ const getAllBookings = async () => {
   return bookings;
 };
 
+const assignTeacher = async (bookingId: string, teacherId: string) => {
+  const booking = await BookingModel.findById(bookingId);
+  if (!booking) {
+    throw new AppError(httpStatus.NOT_FOUND, "Booking not found");
+  }
+
+  const teacher = await TeacherModel.findById(teacherId);
+  if (!teacher) {
+    throw new AppError(httpStatus.NOT_FOUND, "Teacher not found");
+  }
+
+  booking.teacherId = new mongoose.Types.ObjectId(teacherId) as any;
+  await booking.save();
+
+  return booking;
+};
+
 const deleteBooking = async (bookingId: string) => {
   const booking = await BookingModel.findById(bookingId);
   if (!booking) {
@@ -625,4 +642,5 @@ export const BookingService = {
   joinViaLink,
   getAllBookings,
   deleteBooking,
+  assignTeacher,
 };

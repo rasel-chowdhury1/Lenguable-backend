@@ -35,6 +35,12 @@ router.patch(
   BookingController.markStudentJoined,
 );
 
+router.patch(
+  "/:bookingId/assign-teacher",
+  checkAuth(Role.ADMIN),
+  BookingController.assignTeacher,
+);
+
 router.delete(
   "/:bookingId",
   checkAuth(Role.ADMIN),
