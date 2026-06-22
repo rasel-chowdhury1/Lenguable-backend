@@ -8,7 +8,7 @@ type AsyncHandler = (req: Request, res: Response, next: NextFunction) => Promise
 export const catchAsync = (fn: AsyncHandler) => (req: Request, res: Response, next: NextFunction) => {
 
     Promise.resolve(fn(req, res, next)).catch((err: any) => {
-        if (envVars.NODE_ENV === 'development') // production
+        if (envVars.NODE_ENV === 'production') // development || production
             next(err)
     })
 }
