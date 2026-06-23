@@ -10,3 +10,6 @@
 {"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:37:44"}
 {"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:38:04"}
 {"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:38:10"}
+{"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:41:38"}
+{"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:41:50"}
+{"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:42:13"}

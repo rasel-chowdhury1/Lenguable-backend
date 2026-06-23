@@ -54,3 +54,15 @@
 {"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:38:09"}
 {"level":"warn","message":"[payoutCron] Missed payout detected for week 2026-06-21T08:00:00.000Z — running now.","timestamp":"23-06-2026 16:38:10"}
 {"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:38:10"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 569ms","timestamp":"23-06-2026 16:41:37"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:41:37"}
+{"level":"warn","message":"[payoutCron] Missed payout detected for week 2026-06-21T08:00:00.000Z — running now.","timestamp":"23-06-2026 16:41:37"}
+{"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:41:38"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 560ms","timestamp":"23-06-2026 16:41:48"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:41:48"}
+{"level":"warn","message":"[payoutCron] Missed payout detected for week 2026-06-21T08:00:00.000Z — running now.","timestamp":"23-06-2026 16:41:49"}
+{"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:41:50"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 525ms","timestamp":"23-06-2026 16:42:12"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:42:12"}
+{"level":"warn","message":"[payoutCron] Missed payout detected for week 2026-06-21T08:00:00.000Z — running now.","timestamp":"23-06-2026 16:42:13"}
+{"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:42:13"}

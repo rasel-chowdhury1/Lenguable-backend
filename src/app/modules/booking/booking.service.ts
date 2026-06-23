@@ -315,10 +315,11 @@ const cancelBooking = async (
     );
   }
 
-  return;
 
   const hoursUntilClass =
     (classDateTime.getTime() - now.getTime()) / (1000 * 60 * 60);
+
+
   const isWithin24Hours = hoursUntilClass <= 24;
 
   let responseMessage = "";
@@ -327,15 +328,15 @@ const cancelBooking = async (
     booking.status = "cancelled";
     booking.cancellationReason = reason;
     booking.cancelledBy = "teacher";
-    await booking.save();
+    // await booking.save();
 
-    await StudentModel.findByIdAndUpdate(booking.studentId, {
-      $inc: { credits: 1 },
-    });
+    // await StudentModel.findByIdAndUpdate(booking.studentId, {
+    //   $inc: { credits: 1 },
+    // });
 
-    await TeacherModel.findByIdAndUpdate(booking.teacherId, {
-      $inc: { totalCanceledClasses: 1 },
-    });
+    // await TeacherModel.findByIdAndUpdate(booking.teacherId, {
+    //   $inc: { totalCanceledClasses: 1 },
+    // });
 
     responseMessage = isWithin24Hours
       ? "Booking cancelled by teacher within 24 hours. Student credit has been refunded."
