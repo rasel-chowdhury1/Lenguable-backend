@@ -41,6 +41,8 @@ const BookingSchema = new Schema<IBooking>(
       type: String,
       enum: [
         "scheduled",
+        "inProgress",
+        "missed",
         "completed",
         "cancelled",
         "cancelledByStudent",

@@ -10,7 +10,9 @@ import { Types } from "mongoose";
 const CLASS_PRICE = 10;
 
 const BOOKING_STATUS = {
+  MISSED: "missed",
   COMPLETED: "completed",
+
 } as const;
 
 const ATTENDANCE_STATUS = {
@@ -94,7 +96,7 @@ const runBookingCompletion = async () => {
             filter: { _id: b._id },
             update: {
               $set: {
-                status: BOOKING_STATUS.COMPLETED,
+                status: BOOKING_STATUS.MISSED,
                 attendanceStatus: ATTENDANCE_STATUS.STUDENT_NO_SHOW,
                 teacherPaymentEligible: true,
                 studentRefunded: false,
@@ -128,7 +130,7 @@ const runBookingCompletion = async () => {
             filter: { _id: b._id },
             update: {
               $set: {
-                status: BOOKING_STATUS.COMPLETED,
+                status: BOOKING_STATUS.MISSED,
                 attendanceStatus: ATTENDANCE_STATUS.TEACHER_NO_SHOW,
                 teacherPaymentEligible: false,
                 studentRefunded: true,
@@ -158,7 +160,7 @@ const runBookingCompletion = async () => {
           filter: { _id: b._id },
           update: {
             $set: {
-              status: BOOKING_STATUS.COMPLETED,
+              status: BOOKING_STATUS.MISSED,
               attendanceStatus: ATTENDANCE_STATUS.BOTH_ABSENT,
               teacherPaymentEligible: false,
               studentRefunded: true,
