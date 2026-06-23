@@ -271,8 +271,7 @@ const cancelBooking = async (
 ) => {
 
 
-  console.log("=== cancel booking payload =>>>>>>>>>>>>>>>> ", {userId, bookingId, reason});
-
+  
   const user = await UserModel.findById(userId);
 
   if (!user) {
@@ -296,8 +295,6 @@ const cancelBooking = async (
     );
   }
 
-  console.log({user,booking, isStudent, isTeacher})
-
   if (
     booking.status === "cancelled" ||
     booking.status === "cancelledByStudent"
@@ -315,11 +312,8 @@ const cancelBooking = async (
     );
   }
 
-
   const hoursUntilClass =
     (classDateTime.getTime() - now.getTime()) / (1000 * 60 * 60);
-
-
   const isWithin24Hours = hoursUntilClass <= 24;
 
   let responseMessage = "";
@@ -328,21 +322,15 @@ const cancelBooking = async (
     booking.status = "cancelled";
     booking.cancellationReason = reason;
     booking.cancelledBy = "teacher";
+    await booking.save();
 
-    try {
-      await booking.save()
-    } catch (error) {
-      console.log("cancel booking error =>>>> ", error)
-    }
-    // await booking.save();
+    await StudentModel.findByIdAndUpdate(booking.studentId, {
+      $inc: { credits: 1 },
+    });
 
-    // await StudentModel.findByIdAndUpdate(booking.studentId, {
-    //   $inc: { credits: 1 },
-    // });
-
-    // await TeacherModel.findByIdAndUpdate(booking.teacherId, {
-    //   $inc: { totalCanceledClasses: 1 },
-    // });
+    await TeacherModel.findByIdAndUpdate(booking.teacherId, {
+      $inc: { totalCanceledClasses: 1 },
+    });
 
     responseMessage = isWithin24Hours
       ? "Booking cancelled by teacher within 24 hours. Student credit has been refunded."
