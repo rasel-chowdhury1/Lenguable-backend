@@ -328,6 +328,12 @@ const cancelBooking = async (
     booking.status = "cancelled";
     booking.cancellationReason = reason;
     booking.cancelledBy = "teacher";
+
+    try {
+      await booking.save()
+    } catch (error) {
+      console.log("cancel booking error =>>>> ", error)
+    }
     // await booking.save();
 
     // await StudentModel.findByIdAndUpdate(booking.studentId, {
