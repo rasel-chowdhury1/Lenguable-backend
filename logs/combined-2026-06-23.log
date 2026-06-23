@@ -1,0 +1,56 @@
+{"level":"info","message":"\r✅ Mongodb connected successfully in 582ms","timestamp":"23-06-2026 16:36:30"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:36:30"}
+{"level":"warn","message":"[payoutCron] Missed payout detected for week 2026-06-21T08:00:00.000Z — running now.","timestamp":"23-06-2026 16:36:31"}
+{"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:36:31"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 527ms","timestamp":"23-06-2026 16:36:41"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:36:41"}
+{"level":"warn","message":"[payoutCron] Missed payout detected for week 2026-06-21T08:00:00.000Z — running now.","timestamp":"23-06-2026 16:36:41"}
+{"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:36:42"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 514ms","timestamp":"23-06-2026 16:36:48"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:36:48"}
+{"level":"warn","message":"[payoutCron] Missed payout detected for week 2026-06-21T08:00:00.000Z — running now.","timestamp":"23-06-2026 16:36:49"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 534ms","timestamp":"23-06-2026 16:36:51"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:36:51"}
+{"level":"warn","message":"[payoutCron] Missed payout detected for week 2026-06-21T08:00:00.000Z — running now.","timestamp":"23-06-2026 16:36:52"}
+{"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:36:52"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 517ms","timestamp":"23-06-2026 16:36:57"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:36:57"}
+{"level":"warn","message":"[payoutCron] Missed payout detected for week 2026-06-21T08:00:00.000Z — running now.","timestamp":"23-06-2026 16:36:58"}
+{"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:36:58"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 514ms","timestamp":"23-06-2026 16:37:01"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:37:01"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 549ms","timestamp":"23-06-2026 16:37:04"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:37:04"}
+{"level":"warn","message":"[payoutCron] Missed payout detected for week 2026-06-21T08:00:00.000Z — running now.","timestamp":"23-06-2026 16:37:05"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 518ms","timestamp":"23-06-2026 16:37:07"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:37:07"}
+{"level":"warn","message":"[payoutCron] Missed payout detected for week 2026-06-21T08:00:00.000Z — running now.","timestamp":"23-06-2026 16:37:08"}
+{"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:37:08"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 515ms","timestamp":"23-06-2026 16:37:11"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:37:11"}
+{"level":"warn","message":"[payoutCron] Missed payout detected for week 2026-06-21T08:00:00.000Z — running now.","timestamp":"23-06-2026 16:37:12"}
+{"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:37:12"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 509ms","timestamp":"23-06-2026 16:37:26"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:37:26"}
+{"level":"warn","message":"[payoutCron] Missed payout detected for week 2026-06-21T08:00:00.000Z — running now.","timestamp":"23-06-2026 16:37:27"}
+{"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:37:28"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 989ms","timestamp":"23-06-2026 16:37:32"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:37:32"}
+{"level":"warn","message":"[payoutCron] Missed payout detected for week 2026-06-21T08:00:00.000Z — running now.","timestamp":"23-06-2026 16:37:34"}
+{"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:37:34"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 543ms","timestamp":"23-06-2026 16:37:39"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:37:39"}
+{"level":"warn","message":"[payoutCron] Missed payout detected for week 2026-06-21T08:00:00.000Z — running now.","timestamp":"23-06-2026 16:37:40"}
+{"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:37:40"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 518ms","timestamp":"23-06-2026 16:37:43"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:37:43"}
+{"level":"warn","message":"[payoutCron] Missed payout detected for week 2026-06-21T08:00:00.000Z — running now.","timestamp":"23-06-2026 16:37:44"}
+{"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:37:44"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 503ms","timestamp":"23-06-2026 16:38:03"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:38:03"}
+{"level":"warn","message":"[payoutCron] Missed payout detected for week 2026-06-21T08:00:00.000Z — running now.","timestamp":"23-06-2026 16:38:04"}
+{"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:38:04"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 536ms","timestamp":"23-06-2026 16:38:09"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"23-06-2026 16:38:09"}
+{"level":"warn","message":"[payoutCron] Missed payout detected for week 2026-06-21T08:00:00.000Z — running now.","timestamp":"23-06-2026 16:38:10"}
+{"level":"error","message":"[payoutCron] Missed payout check error: cannot create a new collection -- already using 501 collections of 500","timestamp":"23-06-2026 16:38:10"}

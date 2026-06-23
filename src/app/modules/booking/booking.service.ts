@@ -271,7 +271,8 @@ const cancelBooking = async (
 ) => {
 
 
-  
+  console.log("=== cancel booking payload =>>>>>>>>>>>>>>>> ", {userId, bookingId, reason});
+
   const user = await UserModel.findById(userId);
 
   if (!user) {
@@ -295,6 +296,8 @@ const cancelBooking = async (
     );
   }
 
+  console.log({user,booking, isStudent, isTeacher})
+
   if (
     booking.status === "cancelled" ||
     booking.status === "cancelledByStudent"
@@ -311,6 +314,8 @@ const cancelBooking = async (
       "Cannot cancel a class that has already passed",
     );
   }
+
+  return;
 
   const hoursUntilClass =
     (classDateTime.getTime() - now.getTime()) / (1000 * 60 * 60);
