@@ -269,7 +269,11 @@ const cancelBooking = async (
   bookingId: string,
   reason: string,
 ) => {
+
+
+  
   const user = await UserModel.findById(userId);
+
   if (!user) {
     throw new AppError(httpStatus.NOT_FOUND, "User not found");
   }
