@@ -314,6 +314,7 @@ const cancelBooking = async (
 
   const hoursUntilClass =
     (classDateTime.getTime() - now.getTime()) / (1000 * 60 * 60);
+
   const isWithin24Hours = hoursUntilClass <= 24;
 
   let responseMessage = "";
@@ -322,6 +323,7 @@ const cancelBooking = async (
     booking.status = "cancelled";
     booking.cancellationReason = reason;
     booking.cancelledBy = "teacher";
+    booking.cancelledAt = now;
     await booking.save();
 
     await StudentModel.findByIdAndUpdate(booking.studentId, {
@@ -340,6 +342,7 @@ const cancelBooking = async (
       booking.status = "cancelledByStudent";
       booking.cancellationReason = reason;
       booking.cancelledBy = "student";
+      booking.cancelledAt = now;
       await booking.save();
 
       await TeacherModel.findByIdAndUpdate(booking.teacherId, {
@@ -356,6 +359,7 @@ const cancelBooking = async (
       booking.status = "cancelled";
       booking.cancellationReason = reason;
       booking.cancelledBy = "student";
+      booking.cancelledAt = now;
       await booking.save();
 
       await StudentModel.findByIdAndUpdate(booking.studentId, {
