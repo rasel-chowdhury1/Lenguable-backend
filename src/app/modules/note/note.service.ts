@@ -185,6 +185,7 @@ const getAllStudents = async () => {
       );
 
       const lessonsCompleted = await BookingModel.countDocuments({
+        isDeleted: false,
         studentId: student._id,
         teacherJoined: true,
       });

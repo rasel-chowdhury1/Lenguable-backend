@@ -94,6 +94,7 @@ const getOverviewStats = async (
 
     // cancelledByStudent counts because teacher was paid
     BookingModel.countDocuments({
+      isDeleted: false,
       status: { $nin: ["cancelled"] },
       ...startTimeFilter,
     }),
@@ -138,6 +139,7 @@ const getWeeklyFinancials = async (weeks: number = 4) => {
     // All non-free-cancelled bookings
     BookingModel.find(
       {
+        isDeleted: false,
         status: { $nin: ["cancelled"] },
         startTime: {
           $gte: new Date(`${oldestStart}T00:00:00Z`),

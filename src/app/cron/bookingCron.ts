@@ -33,9 +33,11 @@ const runBookingCompletion = async () => {
     // Get pending bookings only
     // ==============================
     const bookings = await BookingModel.find({
+      isDeleted: false,
       status: "scheduled",
       endTime: { $lte: now },
       processedAt: null,
+      
     }).select("_id teacherId studentId teacherJoined studentJoined");
 
     if (!bookings.length) return;

@@ -52,6 +52,7 @@ export interface IBooking {
   reminder24hSent: Date | null;
   reminder2hSent: Date | null;
   reviewRequestSent: boolean;
+  isDeleted: boolean;
 
   // Timestamps
   createdAt?: Date;

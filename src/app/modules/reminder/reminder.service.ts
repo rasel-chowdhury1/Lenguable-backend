@@ -7,7 +7,7 @@ import httpStatus from "http-status-codes";
 
 const sendReminderEmails = async (timeLabel: "24h" | "2h") => {
   // Get all scheduled bookings
-  const bookings = await BookingModel.find({ status: "scheduled" });
+  const bookings = await BookingModel.find({ isDeleted: false, status: "scheduled" });
 
   if (!bookings.length) {
     throw new AppError(httpStatus.NOT_FOUND, "No scheduled bookings found");

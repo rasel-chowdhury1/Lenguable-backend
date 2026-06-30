@@ -187,7 +187,7 @@ const deleteTeacher = async (teacherId: string) => {
   }
 
   // 1. Find all bookings for this teacher to clean up student refs
-  const teacherBookings = await BookingModel.find({ teacherId });
+  const teacherBookings = await BookingModel.find({ teacherId, isDeleted: false });
   const bookingIds = teacherBookings.map((b) => b._id);
 
   // 2. Remove booking refs from all students who booked this teacher

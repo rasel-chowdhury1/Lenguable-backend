@@ -142,6 +142,10 @@ const BookingSchema = new Schema<IBooking>(
       type: Boolean,
       default: false,
     },
+    isDeleted: {
+      type: Boolean,
+      default: false
+    }
   },
   {
     timestamps: true,

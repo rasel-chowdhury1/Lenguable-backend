@@ -237,11 +237,11 @@ const getMyBookings = async (userId: string, viewerTimezone?: string) => {
   let bookings;
 
   if (user.student) {
-    bookings = await BookingModel.find({ studentId: user.student })
+    bookings = await BookingModel.find({ studentId: user.student, isDeleted: false })
       .populate("teacherId", "name email nationality experience")
       .sort({ startTime: 1 });
   } else if (user.teacher) {
-    bookings = await BookingModel.find({ teacherId: user.teacher })
+    bookings = await BookingModel.find({ teacherId: user.teacher, isDeleted: false })
       .populate("studentId", "name email")
       .sort({ startTime: 1 });
   } else {
@@ -278,7 +278,7 @@ const cancelBooking = async (
     throw new AppError(httpStatus.NOT_FOUND, "User not found");
   }
 
-  const booking = await BookingModel.findById(bookingId);
+  const booking = await BookingModel.findOne({ _id: bookingId, isDeleted: false });
   if (!booking) {
     throw new AppError(httpStatus.NOT_FOUND, "Booking not found");
   }
@@ -445,7 +445,7 @@ const markTeacherJoined = async (userId: string, bookingId: string) => {
     throw new AppError(httpStatus.FORBIDDEN, "Only teachers can call this");
   }
 
-  const booking = await BookingModel.findById(bookingId);
+  const booking = await BookingModel.findOne({_id: bookingId, isDeleted: false})
   if (!booking) {
     throw new AppError(httpStatus.NOT_FOUND, "Booking not found");
   }
@@ -487,7 +487,8 @@ const markStudentJoined = async (userId: string, bookingId: string) => {
     throw new AppError(httpStatus.FORBIDDEN, "Only students can call this");
   }
 
-  const booking = await BookingModel.findById(bookingId);
+  const booking = await BookingModel.findOne({_id: bookingId, isDeleted: false})
+
   if (!booking) {
     throw new AppError(httpStatus.NOT_FOUND, "Booking not found");
   }
@@ -531,7 +532,7 @@ const joinViaLink = async (bookingId: string, token: string): Promise<string> =>
     throw new AppError(httpStatus.BAD_REQUEST, "Token does not match this booking");
   }
 
-  const booking = await BookingModel.findById(bookingId);
+  const booking = await BookingModel.findOne({_id: bookingId, isDeleted: false})
 
   if (!booking) {
     throw new AppError(httpStatus.NOT_FOUND, "Booking not found");
@@ -585,7 +586,7 @@ const joinViaLink = async (bookingId: string, token: string): Promise<string> =>
 
 
 const getAllBookings = async () => {
-  const bookings = await BookingModel.find()
+  const bookings = await BookingModel.find({ isDeleted: false })
     .populate({
       path: "studentId",
       select: "name email booking",
@@ -599,7 +600,7 @@ const getAllBookings = async () => {
 };
 
 const assignTeacher = async (bookingId: string, teacherId: string) => {
-  const booking = await BookingModel.findById(bookingId);
+  const booking = await BookingModel.findOne({_id: bookingId, isDeleted: false})
   if (!booking) {
     throw new AppError(httpStatus.NOT_FOUND, "Booking not found");
   }
@@ -624,7 +625,7 @@ const assignTeacher = async (bookingId: string, teacherId: string) => {
 };
 
 const deleteBooking = async (bookingId: string) => {
-  const booking = await BookingModel.findById(bookingId);
+  const booking = await BookingModel.findOne({ _id: bookingId, isDeleted: false });
   if (!booking) {
     throw new AppError(httpStatus.NOT_FOUND, "Booking not found");
   }
@@ -644,7 +645,7 @@ const deleteBooking = async (bookingId: string) => {
       .catch((err) => console.error("Failed to delete calendar event on booking delete:", err));
   }
 
-  await BookingModel.findByIdAndDelete(bookingId);
+  await BookingModel.findByIdAndUpdate(bookingId, { isDeleted: true });
 
   return { deleted: true };
 };

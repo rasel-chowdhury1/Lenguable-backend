@@ -38,6 +38,7 @@ const sendReminderEmails = async (timeLabel: "24h" | "2h") => {
     const sentField = timeLabel === "24h" ? "reminder24hSent" : "reminder2hSent";
 
     const bookings = await BookingModel.find({
+      isDeleted: false,
       status: "scheduled",
       startTime: { $gte: windowStart, $lte: windowEnd },
       [sentField]: null,
@@ -140,6 +141,7 @@ const sendReviewRequestEmails = async () => {
     const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
 
     const completedBookings = await BookingModel.find({
+      isDeleted: false,
       status: "completed",
       endTime: { $gte: oneHourAgo, $lte: now },
       reviewRequestSent: { $ne: true },
