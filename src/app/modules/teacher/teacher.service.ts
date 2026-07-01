@@ -121,6 +121,7 @@ const getAllTeachers = async (viewerTimezone?: string) => {
     });
 
   return teachers.map((teacher) => {
+    
     const obj = teacher.toObject();
     return {
       ...obj,
@@ -130,6 +131,7 @@ const getAllTeachers = async (viewerTimezone?: string) => {
       ),
     };
   });
+
 };
 
 const getSingleTeacher = async (teacherId: string, viewerTimezone?: string) => {

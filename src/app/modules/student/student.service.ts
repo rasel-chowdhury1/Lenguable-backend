@@ -6,6 +6,8 @@ import { IStudent } from "./student.interface";
 import { envVars } from "../../config";
 import bcrypt from "bcryptjs";
 import { UserModel } from "../user/user.model";
+import { CreditTransactionService } from "../creditTransaction/creditTransaction.service";
+import { AdminAuditLogService } from "../adminAuditLog/adminAuditLog.service";
 
 const createStudent = async (
   payload: Partial<IStudent> & { timezone?: string },
@@ -133,7 +135,12 @@ const deleteStudent = async (studentId: string) => {
   return { message: "Student deleted successfully" };
 };
 
-const addCredits = async (studentId: string, credits: number) => {
+const addCredits = async (
+  studentId: string,
+  credits: number,
+  adminId: string,
+  description?: string,
+) => {
   const student = await StudentModel.findById(studentId);
 
   if (!student) {
@@ -144,16 +151,48 @@ const addCredits = async (studentId: string, credits: number) => {
     throw new AppError(httpStatus.BAD_REQUEST, "Credits must be at least 1");
   }
 
+  const balanceBefore = student.credits ?? 0;
+  const balanceAfter = balanceBefore + credits;
+
   const updatedStudent = await StudentModel.findByIdAndUpdate(
     studentId,
     { $inc: { credits } },
     { new: true },
   );
 
+  const studentUser = await UserModel.findOne({ student: studentId }).select("_id");
+
+  await Promise.all([
+    CreditTransactionService.createCreditTransaction({
+      studentId: student._id as any,
+      type: "admin_add",
+      credits,
+      balanceBefore,
+      balanceAfter,
+      bookingId: null,
+      description: description ?? `Admin added ${credits} credit(s)`,
+    }),
+    ...(studentUser
+      ? [
+          AdminAuditLogService.createAuditLog({
+            adminId: new mongoose.Types.ObjectId(adminId) as any,
+            action: "add_credit",
+            targetId: studentUser._id as any,
+            details: description ?? `Added ${credits} credit(s) to student. Balance: ${balanceBefore} → ${balanceAfter}`,
+          }),
+        ]
+      : []),
+  ]);
+
   return updatedStudent;
 };
 
-const removeCredits = async (studentId: string, credits: number) => {
+const removeCredits = async (
+  studentId: string,
+  credits: number,
+  adminId: string,
+  description?: string,
+) => {
   const student = await StudentModel.findById(studentId);
 
   if (!student) {
@@ -168,11 +207,38 @@ const removeCredits = async (studentId: string, credits: number) => {
     throw new AppError(httpStatus.BAD_REQUEST, "Student does not have enough credits");
   }
 
+  const balanceBefore = student.credits ?? 0;
+  const balanceAfter = balanceBefore - credits;
+
   const updatedStudent = await StudentModel.findByIdAndUpdate(
     studentId,
     { $inc: { credits: -credits } },
     { new: true },
   );
+
+  const studentUser = await UserModel.findOne({ student: studentId }).select("_id");
+
+  await Promise.all([
+    CreditTransactionService.createCreditTransaction({
+      studentId: student._id as any,
+      type: "admin_remove",
+      credits,
+      balanceBefore,
+      balanceAfter,
+      bookingId: null,
+      description: description ?? `Admin removed ${credits} credit(s)`,
+    }),
+    ...(studentUser
+      ? [
+          AdminAuditLogService.createAuditLog({
+            adminId: new mongoose.Types.ObjectId(adminId) as any,
+            action: "remove_credit",
+            targetId: studentUser._id as any,
+            details: description ?? `Removed ${credits} credit(s) from student. Balance: ${balanceBefore} → ${balanceAfter}`,
+          }),
+        ]
+      : []),
+  ]);
 
   return updatedStudent;
 };

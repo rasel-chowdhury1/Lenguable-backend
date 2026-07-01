@@ -71,9 +71,15 @@ const deleteStudent = catchAsync(async (req: Request, res: Response) => {
 
 const addCredits = catchAsync(async (req: Request, res: Response) => {
   const studentId = req.params.id;
-  const { credits } = req.body;
+  const adminId = req.user.userId;
+  const { credits, description } = req.body;
 
-  const result = await StudentServices.addCredits(studentId, Number(credits));
+  const result = await StudentServices.addCredits(
+    studentId,
+    Number(credits),
+    adminId,
+    description,
+  );
 
   sendResponse(res, {
     success: true,
@@ -85,9 +91,15 @@ const addCredits = catchAsync(async (req: Request, res: Response) => {
 
 const removeCredits = catchAsync(async (req: Request, res: Response) => {
   const studentId = req.params.id;
-  const { credits } = req.body;
+  const adminId = req.user.userId;
+  const { credits, description } = req.body;
 
-  const result = await StudentServices.removeCredits(studentId, Number(credits));
+  const result = await StudentServices.removeCredits(
+    studentId,
+    Number(credits),
+    adminId,
+    description,
+  );
 
   sendResponse(res, {
     success: true,

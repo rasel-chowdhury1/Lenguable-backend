@@ -10,6 +10,7 @@ import { DiscountCodeService } from "../discountCode/discountCode.service";
 import stripe from "../../config/stripe";
 import { envVars } from "../../config";
 import { sendEmail } from "../../utils/sendEmail";
+import { CreditTransactionService } from "../creditTransaction/creditTransaction.service";
 
 const createCheckoutSession = async (
   userId: string,
@@ -138,10 +139,23 @@ const fulfillPurchase = async (
     credits: packageData.credits,
   });
 
-  student.credits = (student.credits ?? 0) + packageData.credits;
+  const balanceBefore = student.credits ?? 0;
+  const balanceAfter = balanceBefore + packageData.credits;
+
+  student.credits = balanceAfter;
   if (!student.packages) student.packages = [];
   student.packages.push(packageData._id);
   await student.save();
+
+  await CreditTransactionService.createCreditTransaction({
+    studentId: student._id as Types.ObjectId,
+    type: "purchase",
+    credits: packageData.credits,
+    balanceBefore,
+    balanceAfter,
+    bookingId: null,
+    description: `Purchased package "${packageData.name}" (${packageData.credits} credits)`,
+  });
 
   const payment = await PaymentService.markPaymentCompleted(
     stripeSessionId,

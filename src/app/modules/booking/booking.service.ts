@@ -12,6 +12,7 @@ import { sendEmail } from "../../utils/sendEmail";
 import { envVars } from "../../config";
 import { AvailabilityModel } from "../availability/availability.model";
 import { generateToken, verifyToken } from "../../utils/jwt";
+import { CreditTransactionService } from "../creditTransaction/creditTransaction.service";
 
 const computeStatus = (
   startTime: Date,
@@ -119,6 +120,9 @@ const createBooking = async (userId: string, payload: any) => {
 
   const session = await mongoose.startSession();
   let bookingId: any;
+  let creditBalanceBefore = 0;
+  let creditBalanceAfter = 0;
+  let studentDocId: any;
 
   try {
     await session.withTransaction(async () => {
@@ -158,7 +162,10 @@ const createBooking = async (userId: string, payload: any) => {
       availability.slots[slotIndex].isBooked = true;
       await availability.save({ session });
 
-      student.credits = (student.credits ?? 0) - 1;
+      creditBalanceBefore = student.credits ?? 0;
+      student.credits = creditBalanceBefore - 1;
+      creditBalanceAfter = student.credits;
+      studentDocId = student._id;
       await student.save({ session });
 
       const [booking] = await BookingModel.create(
@@ -189,8 +196,18 @@ const createBooking = async (userId: string, payload: any) => {
 
   console.log({teacherTz, studentTz2})
 
-
   const bookingIdStr = bookingId.toString();
+
+  CreditTransactionService.createCreditTransaction({
+    studentId: studentDocId,
+    type: "booking_deduction",
+    credits: 1,
+    balanceBefore: creditBalanceBefore,
+    balanceAfter: creditBalanceAfter,
+    bookingId,
+    description: `1 credit deducted for booking on ${startUtcDate.toISOString()}`,
+  }).catch((err) => console.error("Failed to log credit transaction:", err));
+
   Promise.allSettled([
     sendEmail({
       to: teacherUser.email,
@@ -270,8 +287,6 @@ const cancelBooking = async (
   reason: string,
 ) => {
 
-
-  
   const user = await UserModel.findById(userId);
 
   if (!user) {
@@ -437,6 +452,9 @@ const cancelBooking = async (
   return { refunded, cancelledBy, message: responseMessage };
 };
 
+
+
+
 const TEACHER_RATE = 10;
 
 const markTeacherJoined = async (userId: string, bookingId: string) => {
@@ -468,8 +486,8 @@ const markTeacherJoined = async (userId: string, bookingId: string) => {
       await TeacherModel.findByIdAndUpdate(user.teacher, {
         $inc: {
           totalClasses: 1,
-          totalEarnings: TEACHER_RATE,
-          unpaidEarnings: TEACHER_RATE,
+          // totalEarnings: TEACHER_RATE,
+          // unpaidEarnings: TEACHER_RATE,
         },
       });
     }
@@ -554,7 +572,11 @@ const joinViaLink = async (bookingId: string, token: string): Promise<string> =>
       booking.teacherFirstJoinedAt = now;
       if (withinWindow) {
         await TeacherModel.findByIdAndUpdate(booking.teacherId, {
-          $inc: { totalClasses: 1, totalEarnings: TEACHER_RATE, unpaidEarnings: TEACHER_RATE },
+          $inc: { 
+            totalClasses: 1, 
+            // totalEarnings: TEACHER_RATE, 
+            // unpaidEarnings: TEACHER_RATE 
+          },
         });
       }
     }

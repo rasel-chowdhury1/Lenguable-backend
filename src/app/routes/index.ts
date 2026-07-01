@@ -27,6 +27,9 @@ import { CTA2Routes } from "../modules/cta2/cta2.route";
 import { DiscountCodeRoutes } from "../modules/discountCode/discountCode.route";
 import { AboutRoutes } from "../modules/about/about.route";
 import { NewAvailabilityRoutes } from "../modules/availability/availability.route";
+import { CreditTransactionRoutes } from "../modules/creditTransaction/creditTransaction.route";
+import { TeacherEarningRoutes } from "../modules/teacherEarning/teacherEarning.route";
+import { AdminAuditLogRoutes } from "../modules/adminAuditLog/adminAuditLog.route";
 // import { AvailabilityRoutes } from "../modules/availlabilityByTest/availability.route";
 
 const router = Router();
@@ -143,6 +146,18 @@ const moduleRoutes = [
   {
     path: "/availability",
     router: NewAvailabilityRoutes,
+  },
+  {
+    path: "/credit-transaction",
+    router: CreditTransactionRoutes,
+  },
+  {
+    path: "/teacher-earning",
+    router: TeacherEarningRoutes,
+  },
+  {
+    path: "/admin-audit-log",
+    router: AdminAuditLogRoutes,
   },
 ];
 
