@@ -58,3 +58,17 @@
 {"level":"info","message":"\r✅ Mongodb connected successfully in 575ms","timestamp":"02-07-2026 10:41:29"}
 {"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:41:29"}
 {"level":"info","message":"[payoutCron] Payout for 2026-06-28T08:00:00.000Z status: completed — no action needed.","timestamp":"02-07-2026 10:41:30"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 617ms","timestamp":"02-07-2026 10:42:27"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:42:27"}
+{"level":"info","message":"[payoutCron] Payout for 2026-06-28T08:00:00.000Z status: completed — no action needed.","timestamp":"02-07-2026 10:42:28"}
+{"level":"info","message":"🖥️ IP: ::1 📅: Thursday 🌐 Incoming Request: \u001b[32mGET 🔍\u001b[39m \u001b[32m200 🎉\u001b[39m \u001b[35m/\u001b[39m ⏱️ Response Time: \u001b[93m1013 ms\u001b[39m","size":"42089","timestamp":"02-07-2026 10:42:32"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 638ms","timestamp":"02-07-2026 10:44:28"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 570ms","timestamp":"02-07-2026 10:44:33"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:44:33"}
+{"level":"info","message":"[payoutCron] Payout for 2026-06-28T08:00:00.000Z status: completed — no action needed.","timestamp":"02-07-2026 10:44:34"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 560ms","timestamp":"02-07-2026 10:44:44"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:44:44"}
+{"level":"info","message":"[payoutCron] Payout for 2026-06-28T08:00:00.000Z status: completed — no action needed.","timestamp":"02-07-2026 10:44:44"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 657ms","timestamp":"02-07-2026 10:46:27"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:46:27"}
+{"level":"info","message":"[payoutCron] Payout for 2026-06-28T08:00:00.000Z status: completed — no action needed.","timestamp":"02-07-2026 10:46:28"}
