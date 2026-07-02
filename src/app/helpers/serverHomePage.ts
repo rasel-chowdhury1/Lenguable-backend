@@ -35,15 +35,23 @@ function readLogFile(): {
   const errorLogs: ErrorLogEntry[] = [];
   const responseTimeLogs: ResponseLogEntry[] = [];
 
+      console.log("responseLogFilePath =>>>>>> ", responseLogFilePath)
+
   try {
+
+
     const responseLogData = fs.readFileSync(responseLogFilePath, 'utf8');
 
+    console.log({responseLogData})
+
     responseLogData.split('\n').forEach((entry) => {
+      console.log("entry =>>>>> ", entry)
       if (!entry.trim()) return;
       try {
         const log = JSON.parse(entry);
-        if (log.message.responseTime) {
-          const responseTime = parseFloat(log.message.responseTime);
+        console.log("log =>>>>>>>> ", log)
+        if (log.message.responseTimeMs) {
+          const responseTime = parseFloat(log.message.responseTimeMs);
           const label =
             responseTime > 2000 ? 'High' : responseTime > 1000 ? 'Medium' : 'Low';
 
@@ -188,6 +196,7 @@ async function generateCpuUsageHtml(): Promise<string> {
 async function serverHomePage(): Promise<string> {
   const { errorLogs, responseTimeLogs } = readLogFile();
 
+  console.log("response time log =>>>>>>>", responseTimeLogs)
 
   // Import your existing generateErrorLogTable, generateResponseTimeTable here or define them in TS
   const errorLogTableHtml = generateErrorLogTable(errorLogs); // Call your error log table generator

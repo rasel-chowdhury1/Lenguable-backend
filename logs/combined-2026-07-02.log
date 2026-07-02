@@ -1,3 +1,60 @@
 {"level":"info","message":"🖥️ IP: ::1 📅: Thursday 🌐 Incoming Request: \u001b[34mPOST ✏️\u001b[39m \u001b[32m200 🎉\u001b[39m \u001b[35m/api/v1/auth/logout\u001b[39m ⏱️ Response Time: \u001b[93m5 ms\u001b[39m","size":"86","timestamp":"02-07-2026 09:02:35"}
 {"level":"info","message":"🖥️ IP: ::1 📅: Thursday 🌐 Incoming Request: \u001b[32mGET 🔍\u001b[39m \u001b[31m403 ⚠️\u001b[39m \u001b[35m/api/v1/user/getMe\u001b[39m ⏱️ Response Time: \u001b[93m10 ms\u001b[39m","size":"1149","timestamp":"02-07-2026 09:02:35"}
 {"level":"info","message":"🖥️ IP: ::1 📅: Thursday 🌐 Incoming Request: \u001b[32mGET 🔍\u001b[39m \u001b[32m200 🎉\u001b[39m \u001b[35m/api/v1/student\u001b[39m ⏱️ Response Time: \u001b[93m996 ms\u001b[39m","size":"12106","timestamp":"02-07-2026 09:02:36"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 668ms","timestamp":"02-07-2026 09:07:24"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 09:07:25"}
+{"level":"info","message":"[payoutCron] Payout for 2026-06-28T08:00:00.000Z status: completed — no action needed.","timestamp":"02-07-2026 09:07:25"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 662ms","timestamp":"02-07-2026 09:22:06"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 09:22:06"}
+{"level":"info","message":"[payoutCron] Payout for 2026-06-28T08:00:00.000Z status: completed — no action needed.","timestamp":"02-07-2026 09:22:07"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 1626ms","timestamp":"02-07-2026 10:19:48"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:19:48"}
+{"level":"info","message":"[payoutCron] Payout for 2026-06-28T08:00:00.000Z status: completed — no action needed.","timestamp":"02-07-2026 10:19:49"}
+{"level":"info","message":"🖥️ IP: ::1 📅: Thursday 🌐 Incoming Request: \u001b[32mGET 🔍\u001b[39m \u001b[32m200 🎉\u001b[39m \u001b[35m/\u001b[39m ⏱️ Response Time: \u001b[93m1008 ms\u001b[39m","size":"40907","timestamp":"02-07-2026 10:20:04"}
+{"level":"info","message":"🖥️ IP: ::1 📅: Thursday 🌐 Incoming Request: \u001b[32mGET 🔍\u001b[39m \u001b[31m404 ⚠️\u001b[39m \u001b[35m/favicon.ico\u001b[39m ⏱️ Response Time: \u001b[93m1 ms\u001b[39m","size":"47","timestamp":"02-07-2026 10:20:05"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 1913ms","timestamp":"02-07-2026 10:21:21"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:21:21"}
+{"level":"info","message":"[payoutCron] Payout for 2026-06-28T08:00:00.000Z status: completed — no action needed.","timestamp":"02-07-2026 10:21:23"}
+{"level":"info","message":"🖥️ IP: ::1 📅: Thursday 🌐 Incoming Request: \u001b[32mGET 🔍\u001b[39m \u001b[32m200 🎉\u001b[39m \u001b[35m/\u001b[39m ⏱️ Response Time: \u001b[93m1010 ms\u001b[39m","size":"40908","timestamp":"02-07-2026 10:21:28"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 700ms","timestamp":"02-07-2026 10:22:30"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:22:30"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 556ms","timestamp":"02-07-2026 10:22:35"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:22:35"}
+{"level":"info","message":"[payoutCron] Payout for 2026-06-28T08:00:00.000Z status: completed — no action needed.","timestamp":"02-07-2026 10:22:36"}
+{"level":"info","message":"🖥️ IP: ::1 📅: Thursday 🌐 Incoming Request: \u001b[32mGET 🔍\u001b[39m \u001b[32m200 🎉\u001b[39m \u001b[35m/\u001b[39m ⏱️ Response Time: \u001b[93m1012 ms\u001b[39m","size":"40907","timestamp":"02-07-2026 10:22:50"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 645ms","timestamp":"02-07-2026 10:34:53"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:34:53"}
+{"level":"info","message":"[payoutCron] Payout for 2026-06-28T08:00:00.000Z status: completed — no action needed.","timestamp":"02-07-2026 10:34:54"}
+{"level":"info","message":"🖥️ IP: ::1 📅: Thursday 🌐 Incoming Request: \u001b[32mGET 🔍\u001b[39m \u001b[32m200 🎉\u001b[39m \u001b[35m/\u001b[39m ⏱️ Response Time: \u001b[93m1022 ms\u001b[39m","size":"40908","timestamp":"02-07-2026 10:35:24"}
+{"level":"info","message":"🖥️ IP: ::1 📅: Thursday 🌐 Incoming Request: \u001b[32mGET 🔍\u001b[39m \u001b[32m200 🎉\u001b[39m \u001b[35m/\u001b[39m ⏱️ Response Time: \u001b[93m1008 ms\u001b[39m","size":"40908","timestamp":"02-07-2026 10:35:32"}
+{"level":"info","message":"🖥️ IP: ::1 📅: Thursday 🌐 Incoming Request: \u001b[32mGET 🔍\u001b[39m \u001b[32m200 🎉\u001b[39m \u001b[35m/\u001b[39m ⏱️ Response Time: \u001b[93m1015 ms\u001b[39m","size":"40908","timestamp":"02-07-2026 10:35:53"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 917ms","timestamp":"02-07-2026 10:36:54"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:36:54"}
+{"level":"info","message":"[payoutCron] Payout for 2026-06-28T08:00:00.000Z status: completed — no action needed.","timestamp":"02-07-2026 10:36:55"}
+{"level":"info","message":"🖥️ IP: ::1 📅: Thursday 🌐 Incoming Request: \u001b[32mGET 🔍\u001b[39m \u001b[32m200 🎉\u001b[39m \u001b[35m/\u001b[39m ⏱️ Response Time: \u001b[93m1019 ms\u001b[39m","size":"40907","timestamp":"02-07-2026 10:37:02"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 592ms","timestamp":"02-07-2026 10:37:56"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:37:56"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 590ms","timestamp":"02-07-2026 10:38:00"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:38:00"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 591ms","timestamp":"02-07-2026 10:38:03"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:38:03"}
+{"level":"info","message":"[payoutCron] Payout for 2026-06-28T08:00:00.000Z status: completed — no action needed.","timestamp":"02-07-2026 10:38:04"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 567ms","timestamp":"02-07-2026 10:38:11"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:38:11"}
+{"level":"info","message":"[payoutCron] Payout for 2026-06-28T08:00:00.000Z status: completed — no action needed.","timestamp":"02-07-2026 10:38:12"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 613ms","timestamp":"02-07-2026 10:38:15"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 600ms","timestamp":"02-07-2026 10:38:18"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:38:18"}
+{"level":"info","message":"[payoutCron] Payout for 2026-06-28T08:00:00.000Z status: completed — no action needed.","timestamp":"02-07-2026 10:38:19"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 605ms","timestamp":"02-07-2026 10:38:23"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:38:23"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 2726ms","timestamp":"02-07-2026 10:38:29"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:38:29"}
+{"level":"info","message":"[payoutCron] Payout for 2026-06-28T08:00:00.000Z status: completed — no action needed.","timestamp":"02-07-2026 10:38:29"}
+{"level":"info","message":"🖥️ IP: ::1 📅: Thursday 🌐 Incoming Request: \u001b[32mGET 🔍\u001b[39m \u001b[32m200 🎉\u001b[39m \u001b[35m/\u001b[39m ⏱️ Response Time: \u001b[93m1022 ms\u001b[39m","size":"40908","timestamp":"02-07-2026 10:38:42"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 598ms","timestamp":"02-07-2026 10:41:19"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:41:19"}
+{"level":"info","message":"[payoutCron] Payout for 2026-06-28T08:00:00.000Z status: completed — no action needed.","timestamp":"02-07-2026 10:41:20"}
+{"level":"info","message":"\r✅ Mongodb connected successfully in 575ms","timestamp":"02-07-2026 10:41:29"}
+{"level":"info","message":"[payoutCron] Payout cron scheduled (Sundays 08:00 UTC)","timestamp":"02-07-2026 10:41:29"}
+{"level":"info","message":"[payoutCron] Payout for 2026-06-28T08:00:00.000Z status: completed — no action needed.","timestamp":"02-07-2026 10:41:30"}
