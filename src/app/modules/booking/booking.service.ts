@@ -13,6 +13,7 @@ import { envVars } from "../../config";
 import { AvailabilityModel } from "../availability/availability.model";
 import { generateToken, verifyToken } from "../../utils/jwt";
 import { CreditTransactionService } from "../creditTransaction/creditTransaction.service";
+import { TeacherEarningService } from "../teacherEarning/teacherEarning.service";
 
 const computeStatus = (
   startTime: Date,
@@ -341,6 +342,10 @@ const cancelBooking = async (
     booking.cancelledAt = now;
     await booking.save();
 
+    const studentDoc = await StudentModel.findById(booking.studentId).select("credits");
+    const creditBalanceBefore = studentDoc?.credits ?? 0;
+    const creditBalanceAfter = creditBalanceBefore + 1;
+
     await StudentModel.findByIdAndUpdate(booking.studentId, {
       $inc: { credits: 1 },
     });
@@ -352,6 +357,17 @@ const cancelBooking = async (
     responseMessage = isWithin24Hours
       ? "Booking cancelled by teacher within 24 hours. Student credit has been refunded."
       : "Booking cancelled. Student credit has been refunded.";
+
+    CreditTransactionService.createCreditTransaction({
+      studentId: booking.studentId as any,
+      type: "refund",
+      credits: 1,
+      balanceBefore: creditBalanceBefore,
+      balanceAfter: creditBalanceAfter,
+      bookingId: booking._id as any,
+      description: `1 credit refunded — class cancelled by teacher`,
+    }).catch((err) => console.error("Failed to log credit refund transaction:", err));
+
   } else {
     if (isWithin24Hours) {
       booking.status = "cancelledByStudent";
@@ -359,6 +375,10 @@ const cancelBooking = async (
       booking.cancelledBy = "student";
       booking.cancelledAt = now;
       await booking.save();
+
+      const teacherDoc = await TeacherModel.findById(booking.teacherId).select("unpaidEarnings totalEarnings");
+      const earningBalanceBefore = teacherDoc?.unpaidEarnings ?? 0;
+      const earningBalanceAfter = earningBalanceBefore + 10;
 
       await TeacherModel.findByIdAndUpdate(booking.teacherId, {
         $inc: {
@@ -370,12 +390,27 @@ const cancelBooking = async (
 
       responseMessage =
         "Booking cancelled within 24 hours. No credit refund — teacher has been paid.";
+
+      TeacherEarningService.createTeacherEarning({
+        teacherId: booking.teacherId as any,
+        type: "class_cancelled",
+        amount: 10,
+        balanceBefore: earningBalanceBefore,
+        balanceAfter: earningBalanceAfter,
+        bookingId: booking._id as any,
+        description: `Earned $10 — student cancelled within 24 hours`,
+      }).catch((err) => console.error("Failed to log teacher earning:", err));
+
     } else {
       booking.status = "cancelled";
       booking.cancellationReason = reason;
       booking.cancelledBy = "student";
       booking.cancelledAt = now;
       await booking.save();
+
+      const studentDoc = await StudentModel.findById(booking.studentId).select("credits");
+      const creditBalanceBefore = studentDoc?.credits ?? 0;
+      const creditBalanceAfter = creditBalanceBefore + 1;
 
       await StudentModel.findByIdAndUpdate(booking.studentId, {
         $inc: { credits: 1 },
@@ -387,6 +422,16 @@ const cancelBooking = async (
 
       responseMessage =
         "Booking cancelled. 1 credit has been refunded to your account.";
+
+      CreditTransactionService.createCreditTransaction({
+        studentId: booking.studentId as any,
+        type: "refund",
+        credits: 1,
+        balanceBefore: creditBalanceBefore,
+        balanceAfter: creditBalanceAfter,
+        bookingId: booking._id as any,
+        description: `1 credit refunded — student cancelled more than 24 hours before class`,
+      }).catch((err) => console.error("Failed to log credit refund transaction:", err));
     }
   }
 

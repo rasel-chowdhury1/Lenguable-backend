@@ -2,7 +2,8 @@ import cron from "node-cron";
 import { BookingModel } from "../modules/booking/booking.model";
 import { TeacherModel } from "../modules/teacher/teacher.model";
 import { StudentModel } from "../modules/student/student.model";
-import { Types } from "mongoose";
+import { CreditTransactionModel } from "../modules/creditTransaction/creditTransaction.model";
+import { TeacherEarningModel } from "../modules/teacherEarning/teacherEarning.model";
 
 // ==============================
 // Constants (BEST PRACTICE)
@@ -37,10 +38,29 @@ const runBookingCompletion = async () => {
       status: "scheduled",
       endTime: { $lte: now },
       processedAt: null,
-      
+
     }).select("_id teacherId studentId teacherJoined studentJoined");
 
     if (!bookings.length) return;
+
+    // ==============================
+    // Pre-fetch current balances for ledger entries
+    // ==============================
+    const allStudentIds = [...new Set(bookings.map((b) => b.studentId.toString()))];
+    const allTeacherIds = [...new Set(bookings.map((b) => b.teacherId.toString()))];
+
+    const [studentDocs, teacherDocs] = await Promise.all([
+      StudentModel.find({ _id: { $in: allStudentIds } }).select("_id credits"),
+      TeacherModel.find({ _id: { $in: allTeacherIds } }).select("_id unpaidEarnings"),
+    ]);
+
+    // Running balance maps — updated as each booking is processed
+    const studentCreditMap = new Map<string, number>(
+      studentDocs.map((s) => [s._id.toString(), (s as any).credits ?? 0]),
+    );
+    const teacherEarningMap = new Map<string, number>(
+      teacherDocs.map((t) => [t._id.toString(), (t as any).unpaidEarnings ?? 0]),
+    );
 
     // ==============================
     // Bulk arrays
@@ -48,12 +68,17 @@ const runBookingCompletion = async () => {
     const bookingUpdates: any[] = [];
     const teacherUpdates: any[] = [];
     const studentUpdates: any[] = [];
+    const creditTransactionDocs: any[] = [];
+    const teacherEarningDocs: any[] = [];
 
     for (const b of bookings) {
       const processedAt = new Date();
 
       const teacherJoined = b.teacherJoined;
       const studentJoined = b.studentJoined;
+
+      const teacherKey = b.teacherId.toString();
+      const studentKey = b.studentId.toString();
 
       // =====================================================
       // CASE 1: Both attended
@@ -84,6 +109,19 @@ const runBookingCompletion = async () => {
               },
             },
           },
+        });
+
+        const earningBefore = teacherEarningMap.get(teacherKey) ?? 0;
+        const earningAfter = earningBefore + CLASS_PRICE;
+        teacherEarningMap.set(teacherKey, earningAfter);
+        teacherEarningDocs.push({
+          teacherId: b.teacherId,
+          type: "class_completed",
+          amount: CLASS_PRICE,
+          balanceBefore: earningBefore,
+          balanceAfter: earningAfter,
+          bookingId: b._id,
+          description: `Earned $${CLASS_PRICE} — class completed (both attended)`,
         });
 
         continue;
@@ -120,6 +158,19 @@ const runBookingCompletion = async () => {
           },
         });
 
+        const earningBefore = teacherEarningMap.get(teacherKey) ?? 0;
+        const earningAfter = earningBefore + CLASS_PRICE;
+        teacherEarningMap.set(teacherKey, earningAfter);
+        teacherEarningDocs.push({
+          teacherId: b.teacherId,
+          type: "class_completed",
+          amount: CLASS_PRICE,
+          balanceBefore: earningBefore,
+          balanceAfter: earningAfter,
+          bookingId: b._id,
+          description: `Earned $${CLASS_PRICE} — student did not attend`,
+        });
+
         continue;
       }
 
@@ -151,6 +202,19 @@ const runBookingCompletion = async () => {
           },
         });
 
+        const creditBefore = studentCreditMap.get(studentKey) ?? 0;
+        const creditAfter = creditBefore + 1;
+        studentCreditMap.set(studentKey, creditAfter);
+        creditTransactionDocs.push({
+          studentId: b.studentId,
+          type: "refund",
+          credits: 1,
+          balanceBefore: creditBefore,
+          balanceAfter: creditAfter,
+          bookingId: b._id,
+          description: `1 credit refunded — teacher did not attend`,
+        });
+
         continue;
       }
 
@@ -180,6 +244,19 @@ const runBookingCompletion = async () => {
           },
         },
       });
+
+      const creditBefore = studentCreditMap.get(studentKey) ?? 0;
+      const creditAfter = creditBefore + 1;
+      studentCreditMap.set(studentKey, creditAfter);
+      creditTransactionDocs.push({
+        studentId: b.studentId,
+        type: "refund",
+        credits: 1,
+        balanceBefore: creditBefore,
+        balanceAfter: creditAfter,
+        bookingId: b._id,
+        description: `1 credit refunded — both student and teacher absent`,
+      });
     }
 
     // ==============================
@@ -197,10 +274,23 @@ const runBookingCompletion = async () => {
       await StudentModel.bulkWrite(studentUpdates);
     }
 
+    // ==============================
+    // Insert ledger entries in batch
+    // ==============================
+    if (creditTransactionDocs.length) {
+      await CreditTransactionModel.insertMany(creditTransactionDocs, { ordered: false });
+    }
+
+    if (teacherEarningDocs.length) {
+      await TeacherEarningModel.insertMany(teacherEarningDocs, { ordered: false });
+    }
+
     console.log(
       `✅ Processed: ${bookings.length} bookings | ` +
         `Teachers updated: ${teacherUpdates.length} | ` +
-        `Students updated: ${studentUpdates.length}`,
+        `Students updated: ${studentUpdates.length} | ` +
+        `Credit transactions: ${creditTransactionDocs.length} | ` +
+        `Teacher earnings: ${teacherEarningDocs.length}`,
     );
   } catch (error) {
     console.error("❌ Booking cron failed:", error);

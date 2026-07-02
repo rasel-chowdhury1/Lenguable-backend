@@ -6,6 +6,7 @@ import httpStatus from "http-status-codes";
 import AppError from "../../helpers/AppError";
 import { logger } from "../../utils/logger";
 import countries from "i18n-iso-countries";
+import { TeacherEarningService } from "../teacherEarning/teacherEarning.service";
 
 countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
 
@@ -20,6 +21,8 @@ const getWeekSundayUTC = (from: Date): Date => {
 };
 
 const createStripeConnectAccount = async (teacherId: string) => {
+
+  console.log("hitteed create stripe connect account =>>> ")
   const teacher = await TeacherModel.findById(teacherId);
   if (!teacher) {
     throw new AppError(httpStatus.NOT_FOUND, "Teacher not found");
@@ -36,6 +39,8 @@ const createStripeConnectAccount = async (teacherId: string) => {
     );
   }
 
+
+  console.log("account Id =>>>> ", accountId)
   if (accountId) {
     try {
       const account = await stripe.accounts.retrieve(accountId);
@@ -71,6 +76,7 @@ const createStripeConnectAccount = async (teacherId: string) => {
     await TeacherModel.findByIdAndUpdate(teacherId, {
       stripeAccountId: accountId,
     });
+    
   }
 
   const accountLink = await stripe.accountLinks.create({
@@ -178,6 +184,17 @@ const processTeacherPayout = async (teacherId: string, weekStart?: Date) => {
     await TeacherModel.findByIdAndUpdate(teacher._id, {
       $inc: { totalPaidOut: amount, unpaidEarnings: -amount },
     });
+
+    TeacherEarningService.createTeacherEarning({
+      teacherId: teacher._id as any,
+      type: "payout",
+      amount,
+      balanceBefore: amount,
+      balanceAfter: 0,
+      bookingId: null,
+      payoutId: payout._id as any,
+      description: `Weekly payout of $${amount} processed via Stripe (transfer: ${transfer.id})`,
+    }).catch((err) => logger.error(`[payout] Failed to log teacher earning: ${err.message}`));
 
     logger.info(`[payout] Paid $${amount} to ${teacher.name} (transfer: ${transfer.id})`);
 

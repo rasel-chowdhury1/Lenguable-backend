@@ -10,7 +10,7 @@ const TeacherEarningSchema = new Schema<ITeacherEarning>(
     },
     type: {
       type: String,
-      enum: ["class_completed", "payout", "admin_adjustment"],
+      enum: ["class_completed", "class_cancelled", "payout", "admin_adjustment"],
       required: true,
     },
     amount: {
